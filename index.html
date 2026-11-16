@@ -30,9 +30,9 @@ h1,h2,h3,p{margin:0}
 .brand b{display:block;font:500 19px/1.05 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:170px}
 .brand i{display:block;font:italic 10.5px/1.2 var(--serif);color:var(--gold);letter-spacing:.04em}
 .tabs{display:flex;gap:4px;background:#0a100d;border:1px solid var(--line2);border-radius:999px;padding:4px}
-.tabs button{position:relative;display:flex;align-items:center;gap:7px;border:0;background:transparent;color:var(--muted);padding:8px 13px;border-radius:999px;font-weight:600;font-size:13px;white-space:nowrap}
-.tabs button:hover{color:var(--ink)}
-.tabs button.on{background:var(--surface3);color:var(--gold);box-shadow:inset 0 0 0 1px #46584c}
+.tabs :is(button,a){position:relative;display:flex;align-items:center;gap:7px;border:0;background:transparent;color:var(--muted);padding:8px 13px;border-radius:999px;font-weight:600;font-size:13px;white-space:nowrap}
+.tabs :is(button,a):hover{color:var(--ink)}
+.tabs :is(button,a).on{background:var(--surface3);color:var(--gold);box-shadow:inset 0 0 0 1px #46584c}
 .tabs .badge{position:absolute;top:-3px;right:-2px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--gold);color:#221a0b;font:700 11px/18px var(--sans);text-align:center;animation:pop .4s}
 .tabs .badge.alert{background:var(--red)}
 .stats{display:flex;align-items:center;gap:14px;margin-left:auto}
@@ -381,8 +381,8 @@ main{flex:1;min-height:0;padding:14px 18px 22px;max-width:1500px;width:100%;marg
   .stat.cash b{font-size:20px}
   button.stat{margin:-3px -6px;padding:3px 6px}
   .tabs{position:fixed;left:0;right:0;bottom:0;z-index:36;border:0;border-top:1px solid var(--line);border-radius:0;background:#0b110e;padding:6px 8px calc(6px + env(safe-area-inset-bottom));gap:6px}
-  .tabs button{flex:1;flex-direction:column;justify-content:center;gap:3px;padding:7px 4px 6px;font-size:11.5px;border-radius:12px;min-height:52px}
-  .tabs button .icon{width:21px;height:21px}
+  .tabs :is(button,a){flex:1;flex-direction:column;justify-content:center;gap:3px;padding:7px 4px 6px;font-size:11.5px;border-radius:12px;min-height:52px}
+  .tabs :is(button,a) .icon{width:21px;height:21px}
   .tabs .badge{top:3px;right:calc(50% - 30px)}
   .ticker{padding:5px 12px;font-size:12px}
   main{padding:10px 10px calc(84px + env(safe-area-inset-bottom))}
@@ -460,14 +460,11 @@ main{flex:1;min-height:0;padding:14px 18px 22px;max-width:1500px;width:100%;marg
 @media(max-width:520px){.fstats{grid-template-columns:1fr 1fr 1fr;gap:6px}.fstats div{padding:8px}.fstats b{font-size:17px}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
 
-.archive-cutting{margin-top:19px;padding:14px 16px;border:1px solid var(--line);border-inline-start:3px solid var(--gold);border-radius:4px;background:#17201bd9}
-.archive-cutting h3{font-family:Georgia,serif;font-size:19px;line-height:1.15;color:var(--ink);margin:0 0 5px}
-.archive-cutting p,.title .archive-cutting p{margin:0 0 7px;color:var(--muted);font-size:13px;line-height:1.5;max-width:62ch}
-.archive-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--gold);text-underline-offset:3px}
-.archive-link:focus-visible,.archive-reader button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-.menu .archive-link{text-decoration:none}
-.event .archive-link{color:#47331b;align-self:flex-start;min-height:36px;font-weight:650}
-.country-archive{display:block;margin:0 0 14px;padding:10px 12px;background:#213447;border-inline-start:3px solid #88afd2;border-radius:4px}.country-archive p{margin:0 0 5px;color:#e4ebf0;font:14px/1.45 var(--serif)}.country-archive a.archive-link{color:#d3e6f8}
+.tabs a,.map-home{text-decoration:none}
+.tabs a:focus-visible,.title-files a:focus-visible,.archive-reader button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.title-files{display:flex;align-items:center;flex-wrap:wrap;gap:6px 12px;margin:0 0 18px;color:var(--muted);font-size:13px;line-height:1.5}
+.title-files a{display:inline-flex;align-items:center;gap:5px;color:var(--gold);text-underline-offset:3px}
+.title-files a .icon{width:15px;height:15px}
 .archive-reader{position:fixed;inset:0;width:min(1420px,97vw);height:min(94dvh,1020px);max-width:100vw;max-height:100dvh;margin:auto;padding:0;border:1px solid #8f7952;border-radius:12px;background:#101915;color:var(--ink);overflow:hidden}
 .archive-reader[open]{display:flex;flex-direction:column}
 .archive-reader::backdrop{background:#08100cdb}
@@ -475,22 +472,9 @@ main{flex:1;min-height:0;padding:14px 18px 22px;max-width:1500px;width:100%;marg
 .archive-reader-head strong{font-family:Georgia,serif;font-size:18px}
 .archive-reader-head button{min-height:36px;flex-shrink:0}
 .archive-reader iframe{display:block;min-height:0;flex:1;width:100%;border:0;background:white}
-@media(max-width:650px){.archive-reader{width:100vw;height:100dvh;border:0;border-radius:0}.archive-reader-head{padding:7px 12px}.archive-reader-head strong{font-size:16px}.title:has(.archive-cutting){align-items:safe center}}
-.tabs .notebook-tab{background:#283e50;color:#f3e6c9;box-shadow:inset 0 0 0 1px #5f7890}.tabs .notebook-tab:hover{background:#385168}.tab-short{display:none}
-.case-strip{display:flex;align-items:stretch;gap:12px;margin:12px auto 0;width:min(calc(100% - 32px),1400px);padding:0 12px 0 0;overflow:hidden;border:1px solid #47617a;border-radius:9px;background:linear-gradient(112deg,#203347,#18283b 72%);box-shadow:0 3px 11px #0003}
-.case-lead{min-width:0;display:flex;flex:1;align-items:center;gap:12px;text-align:start;padding:9px 12px;border:0;background:transparent;color:#faf4e8}
-.case-emblem{align-self:stretch;display:grid;place-items:center;min-width:34px;border-inline-end:1px solid #718091;padding-inline-end:11px;color:#e6c78e}
-.case-lead small,.case-lead strong{display:block}.case-lead small{font:600 10px/1.3 var(--mono);letter-spacing:.07em;color:#c2d0df}.case-lead strong{margin-top:2px;font:500 clamp(15px,1.5vw,19px)/1.2 var(--serif)}
-.case-lead>.icon{width:15px;color:#e5c78a}.case-strip a.archive-link{align-self:center;flex:none;min-height:40px;padding:7px 12px;border:1px solid #778ca1;border-radius:6px;color:#f7f6f2;text-decoration:none;font-weight:600}.case-strip a.archive-link:hover,.case-lead:hover{background:#344c63}.case-strip :focus-visible{outline-offset:-3px}
-.notebook-page{gap:13px;padding:clamp(20px,4vw,33px);color:#292b29;background:#f0e8d6;border-inline-start:7px solid #a9946d;box-shadow:inset 0 0 45px #bda47725}
-.notebook-page .eyebrow{color:#355471}.notebook-page h2{color:#242c2b;font-size:clamp(25px,3vw,33px);margin:0}.notebook-status{justify-self:start;border-block-end:1px solid #9e906e;color:#3e504b;font:600 12px/1.5 var(--sans);padding-block-end:3px}
-.notebook-page p{font-size:15px;line-height:1.52}.notebook-quote{margin:0;border-inline-start:3px solid #305f87;padding:10px 14px;background:#fffaf0}.notebook-quote cite{display:block;font-size:12px;color:#47564e;margin-top:7px}.notebook-context{color:#46534e;line-height:1.5}.notebook-page .note.mint{color:#24523a}
-.notebook-page a.archive-link{color:#174c78;text-underline-offset:3px;min-height:40px}.notebook-page>a.archive-link{justify-self:start;padding:9px 14px;background:#234c70;border-radius:5px;color:white;text-decoration:none}.notebook-page a.archive-link:hover{text-decoration:underline}
-.notebook-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid #bab09a;padding-top:10px}.notebook-actions .btn.ghost{color:#223c4c;border-color:#88948d;background:#f7f1e5}
-.swiss-protocol{border-inline-start:3px solid var(--gold);background:#202d28;padding:12px 14px;margin:0 0 14px;border-radius:4px}.swiss-protocol h3{font:500 19px/1.2 var(--serif);color:var(--ink)}.swiss-protocol p{color:#cbd3c8;font-size:13px;margin:6px 0 10px}.swiss-protocol .notebook-quote{color:#26342a;background:#ede7d7;margin-block:8px}
-.title:has(.archive-cutting){align-items:safe center}.title .archive-cutting{margin:0 0 15px;border-inline-start-color:#8cb5e9;background:#162a39e8}.title .in{margin-block:auto}
-@media(max-width:820px){.tabs{gap:3px;padding-inline:5px}.tabs button{min-width:0;white-space:normal;line-height:1.12}.tabs .tab-long{display:none}.tabs .tab-short{display:inline}.case-strip{width:calc(100% - 20px);margin-top:8px;padding-inline-end:6px;gap:3px}.case-lead{padding:8px;gap:7px}.case-emblem{display:none}.case-lead>.icon{display:none}.case-strip a.archive-link{min-height:44px;font-size:12px;padding:5px 8px}.case-strip a.archive-link .icon{width:16px}.case-lead small{font-size:9px}.notebook-page{padding-bottom:calc(19px + env(safe-area-inset-bottom))}}
-@media(min-width:1181px) and (max-width:1380px){.top{gap:9px}.tabs button{padding:8px}.brand b{max-width:110px}.top .stats{gap:9px}}
+@media(max-width:820px){.tabs{gap:3px;padding-inline:5px}.tabs :is(button,a){min-width:0;white-space:normal;line-height:1.12}}
+@media(max-width:650px){.archive-reader{width:100vw;height:100dvh;border:0;border-radius:0}.archive-reader-head{padding:7px 12px}.archive-reader-head strong{font-size:16px}}
+@media(min-width:1181px) and (max-width:1380px){.top{gap:9px}.tabs :is(button,a){padding:8px}.brand b{max-width:110px}.top .stats{gap:9px}}
 </style></head>
 <body><div id="title" class="title" hidden></div><div id="app"></div><div id="sheet"></div><div id="veil"></div><div id="toasts" aria-live="polite"></div>
 <dialog class="archive-reader" id="archive-reader" aria-labelledby="archive-reader-title"><div class="archive-reader-head"><strong id="archive-reader-title"></strong><button class="btn ghost" type="button" id="archive-reader-close"></button></div></dialog>
@@ -929,8 +913,7 @@ function lobbyCost(S,ci,kind){
   if(kind==='bribe')return Math.round((base+S.c[ci].bribes*0.6)*(1+S.comp*0.2)*10)/10;
   return base;
 }
-function barredSwissPayment(S,ci,kind){return ci===0&&kind==='bribe'&&S.notebook?.swiss==='filed';}
-function lobbyReady(S,ci,kind){return !barredSwissPayment(S,ci,kind)&&!(S.c[ci].cd[kind]>S.day);}
+function lobbyReady(S,ci,kind){return !(S.c[ci].cd[kind]>S.day);}
 function lobby(S,ci,kind){
   const c=S.c[ci],lb=LOBBY[kind],cost=lobbyCost(S,ci,kind);
   if(S.cash<cost||!lobbyReady(S,ci,kind))return false;
@@ -1851,7 +1834,7 @@ const SPEEDS=[0,0.8,1.5,2.6];
 const $=id=>document.getElementById(id);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const P={
-  notebook:'<rect x="5" y="3" width="15" height="18" rx="2"/><path d="M9 3v18m3-13h5m-5 4h4M3 7h4m-4 5h4m-4 5h4"/>',
+  folder:'<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
   factory:'<path d="M3 21V10l6 4v-4l6 4V5h4v16zM7 17h2m4 0h2"/>',
   globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/>',
   shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/>',
@@ -1881,7 +1864,11 @@ const prefs=Object.assign({sound:true,name:'Kromora',lang:null},readLocal(PREF_K
 function applyLang(l){
   setLang(l);document.documentElement.lang=LANG;document.title=L('Mürekkep ve İhale','Ink & Tender');
 }
-{const m=/[?&]lang=(tr|en)\b/.exec(location.search),nav=(navigator.language||'tr').toLowerCase();applyLang(m?m[1]:prefs.lang||(nav.startsWith('tr')?'tr':'en'));}
+{
+  const requested=new URLSearchParams(location.search).get('lang');
+  const browserLanguage=(navigator.language||'tr').toLowerCase();
+  applyLang(requested ? (requested==='tr'?'tr':'en') : prefs.lang||(browserLanguage.startsWith('tr')?'tr':'en'));
+}
 const UI={tab:'factory',speed:1,lastSpeed:1,modal:null,sel:null,country:null,bid:1,sigs:{},tickerText:'',saveT:0,domT:0,over:false};
 
 /* ---------- ses ---------- */
@@ -1919,7 +1906,7 @@ function shell(){
       <button data-act="tab" data-tab="factory">${ic('factory')}${L(`Fabrika`,`Factory`)}</button>
       <button data-act="tab" data-tab="tenders">${ic('globe')}${L(`İhaleler`,`Tenders`)}<span class="badge" id="bd-t" hidden></span></button>
       <button data-act="tab" data-tab="press">${ic('shield')}${L(`Uyum ve Basın`,`Compliance & Press`)}<span class="badge alert" id="bd-p" hidden>!</span></button>
-      <button type="button" data-act="notebook" class="notebook-tab" aria-haspopup="dialog" aria-label="${notebookName()}">${ic('notebook')}<span class="tab-long">${notebookName()}</span><span class="tab-short">${L('Defter','Notebook')}</span></button>
+    ${archiveLink()}
     </nav>
     <div class="stats">
       <button class="stat cash" data-act="bank" title="${L(`Banka ve kredi`,`Bank and loans`)}"><span>${L(`Kasa`,`Cash`)} ${ic('bank')}</span><b class="num" id="st-cash"></b><small id="st-loan" hidden></small></button>
@@ -1937,20 +1924,10 @@ function shell(){
     <button class="iconbtn" data-act="menu" aria-label="${L(`Menü`,`Menu`)}">${ic('menu')}</button>
   </header>
   <div class="ticker"><b>${L(`SON HABER`,`NEWS`)}</b><span id="ticker"></span></div>
-  <aside class="case-strip" aria-label="${L('Araştırma masası','Research desk')}">
-    <button type="button" class="case-lead" data-act="notebook" aria-haspopup="dialog"><span class="case-emblem">${ic('notebook')}</span><span><small>${L('İsviçre ihalesi','Swiss tender')}</small><strong id="case-next"></strong></span>${ic('arrow')}</button>
-    ${archiveLink(L('Dünya haritası','World map'))}
-  </aside>
   <main id="main"></main>`;
 }
 function patchTop(){
   setT($('st-name'),S.name);
-  const nextLead={
-    lead:L('Aracı ödemesini kim onayladı?','Who authorised the intermediary payment?'),
-    noted:L('Kaynak bulundu. Ödeme formu masanda.','Source pinned. The payment form is on your desk.'),
-    filed:L('İmzalı talimat ve dayandığı belge','Signed payment rule and supporting record')
-  };
-  setT($('case-next'),nextLead[S.notebook.swiss]);
   if(UI.cashShown===undefined||Math.abs(UI.cashShown-S.cash)<0.06)UI.cashShown=S.cash;else UI.cashShown+=(S.cash-UI.cashShown)*0.3;
   setT($('st-cash'),money(UI.cashShown));$('st-cash').classList.toggle('pulse-cash',!!UI.cashPulse&&RT.clock-UI.cashPulse<0.5);
   $('st-cash').style.color=S.cash<0?'var(--red)':'';
@@ -2152,26 +2129,13 @@ function monthlyCap(prod){
   const T=Math.max(BUILD.mill.T[S.b.mill-1],BUILD.mixer.T[S.b.mixer-1],prod==='band'?BUILD.press.T[S.b.press-1]:0);
   return Math.round(30/T);
 }
-function countryReading(k){
-  if(k.id==='ch')return '';
-  const prompts={
-    br:L('Darphane sözleşmelerindeki uzlaşmayla ceza davasındaki beraati ayrı ayrı oku. Hangi karar kimi bağladı?','Compare the mint contract settlement with the acquittal in the criminal case. Who was covered by each decision?'),
-    tr:L('Bandrol ihalesinde adı geçen başarı primini kim bildirdi? Belgelerle tarafların yanıtlarını birlikte oku.','Who reported a success fee in the tax stamp tender? Read the records alongside the parties’ responses.'),
-    ma:L('Malta Files haberinde hangi ödeme kaydına dayanılıyor? Tarafların bu ödemeye ilişkin açıklamalarını bul.','Which payment record did the Malta Files report cite? Find the parties’ accounts of the payment.'),
-    de:L('Siegwerk, SICPA’nın hangi mürekkep işini devraldı? Dönemin haberlerinde satışın kapsamını ara.','Which part of SICPA’s ink business did Siegwerk acquire? Look for the scope of the deal in contemporary coverage.'),
-    at:L('Ödül haberini kim yayımladı? Şirketin kendi açıklamasında hangi standarttan söz ettiğine bak.','Who published the news about the awards? Check which standard the company describes in its own announcement.'),
-    pt:L('Portekiz kayıtlarındaki yazı bir yorum. Yazarın adalet sistemi hakkında hangi görüşü savunduğunu oku.','The Portuguese record is an opinion piece. What argument does its author make about the justice system?')
-  };
-  if(!prompts[k.id])return '';
-  return `<aside class="country-archive"><p>${prompts[k.id]}</p>${archiveLink(L('Basın arşivinde '+k.name,k.name+' in the press archive'),k.id)}</aside>`;
-}
 function countryModal(){
   const i=UI.country,c=S.c[i],k=COUNTRIES[i],t=c.tender;
   const acts=Object.keys(LOBBY).map(kind=>{
     const lb=LOBBY[kind],cost=lobbyCost(S,i,kind),ready=lobbyReady(S,i,kind),full=c.rel>=100;
     return `<button class="act ${kind}" data-act="lobby" data-kind="${kind}" ${S.cash<cost||!ready||full?'disabled':''}>
       <span class="ico">${ic(kind==='visit'?'users':kind==='dinner'?'dinner':'envelope')}</span>
-      <div><b>${lb.name}</b><span>${barredSwissPayment(S,i,kind)?L('İmzalı ödeme talimatıyla kapalı','Closed by your signed payment rule'):ready?`${L('İlişki','Relations')} +${lb.rel}${lb.heat?` · ${L('Şüphe','Suspicion')} +${lb.heat}`:''}`:L(`Tekrar için ${days(c.cd[kind]-S.day)} bekle`,`Available again in ${days(c.cd[kind]-S.day)}`)}</span></div><em>${money(cost)}</em></button>`;}).join('');
+      <div><b>${lb.name}</b><span>${ready?`${L('İlişki','Relations')} +${lb.rel}${lb.heat?` · ${L('Şüphe','Suspicion')} +${lb.heat}`:''}`:L(`Tekrar için ${days(c.cd[kind]-S.day)} bekle`,`Available again in ${days(c.cd[kind]-S.day)}`)}</span></div><em>${money(cost)}</em></button>`;}).join('');
   let right='';
   if(t){
     const cap=monthlyCap(k.prod),due=40+t.qty*13;
@@ -2198,8 +2162,7 @@ function countryModal(){
         <div class="duo"><div class="rel">${esc(S.name)} ${relBar(c.rel)}</div><div class="rel riv">Graviton ${relBar(c.rrel)}</div></div>
         <div class="note" style="margin:-4px 0 10px">${L('Şu anki tedarikçi','Current supplier')}: <b>${c.owner===0?L('sen','you'):c.owner===1?'Graviton':L('yok','none')}</b> · ${L(`Graviton burada <b>${rivalWord(S,i)}</b>.`,`Graviton is <b>${rivalWord(S,i)}</b> here.`)}</div>
         <div class="acts">${acts}</div></div>
-    <div class="pad tend-pane">${i===0?swissTenderNote():countryReading(k)}${right}
-      ${i===0?`<div class="country-archive">${archiveLink(L('Basın arşivinde İsviçre','Switzerland in the press archive'),'ch')}</div>`:''}</div></div></div>`;
+    <div class="pad tend-pane">${right}</div></div></div>`;
 }
 
 /* ---------- uyum & basın ---------- */
@@ -2223,7 +2186,6 @@ function renderPress(){
       <p>${L(`İpuçları olaylardaki seçimlerinle gelir. Dosya dolunca ne yapacağına sen karar verirsin.`,`Clues come from your choices in events. When the file is full, you decide what to do with it.`)}</p>
       <div class="clues" id="clues"></div>
       <div class="eyebrow" style="margin-top:20px">${L(`Gazete`,`Newspaper`)}</div><div class="news" id="news"></div>
-      ${deskFolder()}
     </section></div>`;
   $('main')._rows=compRows;tickPress();
 }
@@ -2304,129 +2266,23 @@ function helpHtml(){
     <div class="note" style="margin-bottom:16px">Hedef: 24 ayın sonunda Graviton’dan fazla ülkenin tedarikçisi olmak. Sekiz ülkeyi de alırsan tekel kurarsın. Nakit sıkışırsa üstteki Kasa’ya tıkla: banka kredi verir. Boşluk tuşu oyunu duraklatır.</div>
     <button class="btn" data-act="close">Anladım ${ic('arrow')}</button></div>`;
 }
-
-// The real-world reference folder sits on top of the current game view.
-// Opening it preserves the tender, selected bid, game date and any open envelope.
 const archiveReader=$('archive-reader');
 const archiveClose=$('archive-reader-close');
 let archiveOpener=null;
-function archiveLink(label,country='',classes='',swissBrief=false){
-  const params=new URLSearchParams({lang:LANG,from:'game',embed:'game'});
-  if(country)params.set('country',country.toUpperCase());
-  if(swissBrief){params.set('case',SWISS_CASE);params.set('notebook','swiss-tender');}
-  const fragment=swissBrief?'#dosya/'+SWISS_CASE:'';
-  return `<a class="archive-link ${classes}" href="/harita/?${esc(params.toString())}${fragment}" data-archive>${ic('globe')} ${esc(label)}</a>`;
-}
-const SWISS_CASE='ch-sicpa-2023';
-const SWISS_SOURCE='sicpa-0bb0c73bb1c4';
-let notebookOrigin=null;
-let returnPinnedNote=false;
-const notebookName=()=>L('Soruşturma defteri','Investigation notebook');
 
-function notebookButton(label,classes='btn small'){
-  return `<button class="${classes}" type="button" data-act="notebook">${esc(label)}</button>`;
+function mapLanguage(){
+  const lang=new URLSearchParams(location.search).get('lang');
+  return ['tr','en','de','fr','ar','es'].includes(lang)?lang:LANG;
 }
-function swissSourceLink(){
-  return archiveLink(L('27 Nisan 2023 tarihli dosyayı incele','Examine the case of 27 April 2023'),'ch','',true);
-}
-function swissNote(){
-  return `<blockquote class="notebook-quote">
-    <p>${L('Savcılık, 2008–2015 döneminde SICPA’nın çalışan ve danışmanlarının suç işlemesini önleyecek tedbirleri eksik bıraktığını saptadı. SICPA’ya yazdığı mektupta, şirketin bu eksikliği sonradan kendi girişimiyle tamamen giderdiğini belirtti.','The prosecutor found that SICPA’s safeguards had fallen short in preventing offences by employees and consultants between 2008 and 2015. In its letter to SICPA, the prosecutor also said the company had since corrected the deficiency voluntarily and in full.')}</p>
-    <cite><a class="archive-link" href="https://www.sicpa.com/sites/default/files/2025-09/side_letter_oag_regarding_sicpa_s_sanction_de_fr_en_20230427.pdf" target="_blank" rel="noopener noreferrer">${L('İsviçre Federal Savcılığının SICPA’ya mektubu · 27 Nisan 2023 (PDF)','Letter from the Swiss Office of the Attorney General to SICPA · 27 April 2023 (PDF)')}</a></cite></blockquote>`;
-}
-function notebookModal(opener){
-  if(!S)return;
-  if(UI.modal!=='notebook'){
-    notebookOrigin={kind:UI.modal,opener};
-  }
-  const stage=S.notebook.swiss;
-  const title=L('İsviçre ihalesi için iki imza','Two signatures for the Swiss tender');
-  let body='';
-  if(stage==='lead'){
-    body=`<p>${L('Amcanın defterinde bir tarih var. Yanına kurşunkalemle “Aracıya ödeme emrini kim imzaladı?” yazmış. İsviçre ihale dosyanı hazırlarken bu sayfayı açık bırakmış.','Your uncle circled a date and pencilled a question beside it. “Who signed off on payments to the intermediary?” He left the notebook open at this page beside your Swiss tender papers.')}</p>
-      <p>${L('Amcan iki satırın altını çizmiş. Kararı ve SICPA’nın yanıtını oku. Aracı ödemelerini gözden geçirirken işine yarayacak satırı seçip defterine al.','Your uncle marked two lines. Read the ruling and SICPA’s response, then pin the line that will help you review intermediary payments.')}</p>
-      ${swissSourceLink()}`;
-  }else{
-    body=swissNote();
-    if(stage==='noted'){
-      body+=`<p>${L('Notun sayfaya iliştirildi. Şimdi senin masanda bir aracı ödeme formu var. İsviçre tekliflerinde bu formun nasıl onaylanacağına şirketin adına karar ver.','Your note is pinned. On your desk sits an intermediary payment form for your own company. Decide who will have to authorise it on Swiss bids.')}</p>
-        <button class="btn" type="button" data-act="notebook-swiss">${L('İsviçre ihale masasına git','Go to the Swiss tender desk')} ${ic('arrow')}</button>`;
-    }else{
-      body+=`<p class="note mint">${L('İmzaladığın talimat yürürlükte. Şirketinin İsviçre tekliflerinde aracı ödemeleri yazılı gerekçe ve iki imza gerektiriyor. Bu sezon rüşvet seçeneği kapalı.','Your signed rule is in effect. Intermediary payments on your company’s Swiss bids require a written reason and two signatures. The bribe option is closed for the season.')}</p>`;
-    }
-    body+=`<div>${swissSourceLink()}</div>`;
-  }
-  const status=stage==='lead'?L('Açık soru','Open question'):stage==='noted'?L('Kaynaklı not · Karar bekliyor','Source pinned · Decision pending'):L('Kaynaklı not · Talimat imzalandı','Source pinned · Rule signed');
-  openModal('notebook',`<div class="menu notebook-page">
-    <div class="eyebrow">${notebookName()}</div><h2 id="notebook-heading" tabindex="-1">${title}</h2>
-    <div class="notebook-status" role="status">${status}</div>
-    ${body}
-    <small class="notebook-context">${L('SICPA kararı gerçek bir belgedir. İhale ve ödeme talimatı oyundaki şirketine aittir.','The SICPA ruling is a historical record. The tender and the payment rule belong to your company in the game.')}</small>
-    <div class="notebook-actions">${archiveLink(L('Dünya haritasını aç','Open world map'))}
-    <button class="btn ghost" type="button" data-act="notebook-back">${L('Defteri kapat','Close notebook')}</button></div></div>`,true);
-  const dialog=$('veil').querySelector('[role="dialog"]');dialog.setAttribute('aria-labelledby','notebook-heading');
-  $('notebook-heading').focus({preventScroll:true});
-}
-function closeNotebook(){
-  const origin=notebookOrigin;
-  notebookOrigin=null;
-  if(origin?.kind==='intro')introModal();
-  else if(origin?.kind==='country')openModal('country',countryModal());
-  else if(origin?.kind==='menu')menuModal();
-  else closeModal();
-  if(origin?.opener?.isConnected)origin.opener.focus({preventScroll:true});
-  else if(origin?.opener?.dataset.act==='notebook'){
-    const area=UI.modal?$('veil'):$('app');
-    area.querySelector('[data-act="notebook"]')?.focus({preventScroll:true});
-  }
-}
-function visitSwissDesk(){
-  const previous=notebookOrigin;
-  notebookOrigin=null;
-  S.intro=false;
-  setTab('tenders');
-  if(previous?.kind!=='country'||UI.country!==0){
-    UI.bid=S.c[0].tender?.bid??1;
-  }
-  UI.country=0;
-  openModal('country',countryModal());
-  const sign=$('veil').querySelector('[data-act="swiss-sign"]');
-  if(sign)sign.focus();
-  save();
-}
-function swissTenderNote(){
-  const stage=S.notebook.swiss;
-  if(stage==='lead')return `<section class="swiss-protocol"><h3>${L('Amcanın sorusu','Your uncle’s question')}</h3><p>${L('Aracı ödemelerini kim onaylayacak? Amcan, İsviçre’de verilmiş bir kararın tarihini defterine yazmış.','Who will authorise intermediary payments? Your uncle wrote the date of a Swiss ruling in his notebook.')}</p>${notebookButton(L('Defterdeki ipucunu izle','Follow the lead in the notebook'))}</section>`;
-  if(stage==='filed')return `<section class="swiss-protocol"><h3>${L('Ödeme talimatı imzalandı','Payment rule signed')}</h3><p>${L('İsviçre’de aracı ödemeleri için gerekçe ve iki imza gerekiyor. Bu sezon rüşvet seçeneği kapalı.','Swiss intermediary payments now need a reason and two signatures. The bribe option is closed for the season.')}</p>${notebookButton(L('Kaynaklı notu oku','Read the sourced note'),'btn small ghost')}</section>`;
-  return `<section class="swiss-protocol"><h3>${L('Aracı ödeme formu','Intermediary payment form')}</h3>
-    <p>${L('Defterindeki savcılık kararını okudun. Şirketinin İsviçre ihalelerinde her aracı ödemesi için yazılı gerekçe ve ikinci bir imza ister misin?','You have read the prosecutor’s finding. Will you require a written reason and a second signature for each intermediary payment on your company’s Swiss tenders?')}</p>
-    <p>${L('İmzalarsan 2 itibar puanı kazanırsın. Bu sezon İsviçre’de rüşvet veremezsin. Formu daha sonra da imzalayabilirsin.','Signing earns 2 reputation points and closes the Swiss bribe option for the season. You can leave the form unsigned and return later.')}</p>
-    <button type="button" class="btn" data-act="swiss-sign">${L('Çift imza talimatını imzala','Sign the two-signature rule')}</button></section>`;
-}
-function signSwissRule(){
-  if(UI.modal!=='country'||UI.country!==0||S.notebook.swiss!=='noted')return;
-  S.notebook.swiss='filed';
-  rep(S,2);
-  addNews(S,()=>L(`${S.name} İsviçre ihalelerindeki aracı ödemelerinde çift imza şartı getirdi.`,`${S.name} now requires two signatures on Swiss tender intermediary payments.`),'gold');
-  save();
-  patchTop();
-  openModal('country',countryModal(),false,true);
-  $('veil').querySelector('.swiss-protocol [data-act="notebook"]')?.focus();
-  toast(L('Talimat yürürlükte · İtibar +2','Rule in effect · Reputation +2'));
-}
-
-function deskFolder(onTitle=false){
-  return `<aside class="archive-cutting"><h3>${L('Amcanın kupür dosyası','Your uncle’s press clippings')}</h3>
-    <p>${onTitle?L('Zarfın yanında «SICPA · 1927–2027» yazılı bir dosya duruyor. İçinde gerçek gazete kupürleri, ihale kayıtları ve mahkeme kararları var.','Beside the envelope lies a folder marked “SICPA · 1927–2027”. Inside are real press clippings, procurement records and court decisions.'):
-    L('Amcanın notunu hatırlıyorsun: “Tekliften önce tutanağı oku.” Dosyayı açıp SICPA hakkındaki haberleri, kamu belgelerini ve tarafların yanıtlarını ülke ülke inceleyebilirsin.','You remember your uncle’s note: “Read the minutes before you bid.” Open his folder to look up public records, news reports and responses about SICPA, country by country.')}</p>
-    ${archiveLink(L('SICPA arşivini aç','Open the SICPA archive'))}
-    ${onTitle?'':notebookButton(notebookName(),'btn small ghost')}</aside>`;
+function archiveLink(){
+  const params=new URLSearchParams({lang:mapLanguage(),from:'game',embed:'game'});
+  return `<a data-archive href="/harita/?${esc(params.toString())}" aria-haspopup="dialog">${ic('folder')} ${L('Dosyalar','Case files')}</a>`;
 }
 function openArchive(link){
   if(archiveReader.open)return;
   archiveOpener=link;
-  $('archive-reader-title').textContent=L('Basın masası · SICPA Century','Press desk · SICPA Century');
-  archiveClose.textContent=L('Masaya dön','Back to the desk');
+  $('archive-reader-title').textContent=L('Dosyalar','Case files');
+  archiveClose.textContent=L('Oyuna dön','Back to game');
   const frame=document.createElement('iframe');
   frame.title=L('SICPA haber ve belge arşivi','SICPA news and document archive');
   frame.src=link.href;
@@ -2440,21 +2296,10 @@ archiveReader.addEventListener('close',()=>{
   archiveReader.querySelector('iframe')?.remove();
   if(archiveOpener?.isConnected)archiveOpener.focus({preventScroll:true});
   archiveOpener=null;
-  if(returnPinnedNote){
-    returnPinnedNote=false;
-    notebookModal();
-  }
 });
 window.addEventListener('message',event=>{
   const frame=archiveReader.querySelector('iframe');
-  if(!archiveReader.open||event.origin!==location.origin||!frame||event.source!==frame.contentWindow)return;
-  if(event.data?.type==='sicpa-century:close-archive'){archiveReader.close();return;}
-  if(!S||event.data?.type!=='sicpa-century:pin-source'||event.data.caseId!==SWISS_CASE||event.data.sourceId!==SWISS_SOURCE)return;
-  const page=new URL(frame.contentWindow.location.href);
-  if(page.origin!==location.origin||page.searchParams.get('notebook')!=='swiss-tender'||page.hash!=='#dosya/'+SWISS_CASE||!frame.contentDocument.querySelector('#detail[open]'))return;
-  if(S.notebook.swiss==='lead'){S.notebook.swiss='noted';save();}
-  returnPinnedNote=true;
-  archiveReader.close();
+  if(archiveReader.open && event.origin===location.origin && frame && event.source===frame.contentWindow && event.data?.type==='sicpa-century:close-archive')archiveReader.close();
 });
 document.addEventListener('click',e=>{
   const link=e.target.closest('a[data-archive]');
@@ -2468,9 +2313,9 @@ function menuModal(){
   openModal('menu',`<div class="menu"><h2>${L(`Menü`,`Menu`)}</h2>
     <button class="btn" data-act="close">${ic('play')} ${L(`Oyuna dön`,`Back to game`)}</button>
     <button class="btn ghost" data-act="help">${ic('help')} ${L(`Nasıl oynanır?`,`How to play`)}</button>
-    ${archiveLink(L('Amcanın kupür dosyası','Your uncle’s press clippings'),'','btn ghost')}
     <button class="btn ghost" data-act="sound">${ic(prefs.sound?'sound':'mute')} ${L('Ses','Sound')}: ${prefs.sound?L('açık','on'):L('kapalı','off')}</button>
     <button class="btn ghost" data-act="lang" data-v="${LANG==='en'?'tr':'en'}">${ic('globe')} ${LANG==='en'?'Dil: Türkçe':'Language: English'}</button>
+    <a class="btn ghost map-home" href="/?lang=${mapLanguage()}" data-act="home">${L('Haritaya dön','Back to map')}</a>
     <button class="btn ghost" data-act="restart">${ic('refresh')} ${L(`Yeni oyun`,`New game`)}</button>
     <div class="note">${L(`İlerlemen bu tarayıcıda otomatik kaydedilir.`,`Your progress is saved automatically in this browser.`)}</div></div>`,true);
 }
@@ -2491,9 +2336,8 @@ function bankModal(keep){
 function introModal(){
   openModal('intro',`<div class="event"><div class="pic" style="background-image:var(--art-cover)"></div><div class="txt">
     <div class="eyebrow">${L(`OCAK 2027`,`JANUARY 2027`)}</div><h2>${L(`Bir boyahane, bir kasa, bir zarf`,`A dye works, a safe, an envelope`)}</h2>
-    <p>${esc(L(`Amcandan sana eski bir boyahane ve kasada 20 milyon dolar kaldı.\n\nDünyanın banknot mürekkebini ve bandrolünü tek bir dev basıyor: Graviton. Sekiz ülkenin beşi onun elinde.\n\nMasanda imzasız bir zarf duruyor:\n«Graviton hiçbir ihaleyi tesadüfen kazanmadı. Hazır olduğunda yazacağım. — K.»`,`Your uncle left you an old dye works and 20 million dollars in the safe.\n\nOne giant prints the world’s banknote ink and tax stamps: Graviton. It holds five of the eight countries.\n\nAn unsigned envelope sits on your desk:\n«Graviton never won a tender by chance. I’ll write when you’re ready. — K.»`))}</p>
-    <p>${L('Zarfın altından bir defter çıkıyor. Amcan, ilk İsviçre ihalesi için 27 Nisan 2023 tarihli bir kararın altını çizmiş. Kenarına “Aracıya ödeme emrini kim imzaladı?” diye yazmış.','Under the envelope lies a notebook. For your first Swiss tender, your uncle underlined a ruling dated 27 April 2023. In the margin he wrote, “Who signed off on payments to the intermediary?”')}</p>
-    <div class="choices">${notebookButton(L('İsviçre dosyasına başla','Start the Swiss file'),'btn dark')}<button class="btn dark" data-act="close">${L(`Fabrikaya gir`,`Enter the factory`)} ${ic('arrow')}</button></div></div></div>`);
+    <p>${esc(L(`Amcan sana bir boyahane ve 20 milyon dolar bıraktı. Masadaki dosyaya tek satır yazmış. “İhaleye girmeden önce oku.”\n\nYanında K. imzalı bir zarf var. “Graviton hiçbir ihaleyi tesadüfen kazanmadı. Hazır olduğunda yazacağım.”`,`Your uncle left you a dye works and 20 million dollars. He wrote one line on the file on his desk. “Read this before you bid.”\n\nBeside it lies a letter signed K. “Graviton never won a tender by chance. I’ll write when you’re ready.”`))}</p>
+    <div class="choices"><button class="btn dark" data-act="close">${L(`Fabrikaya gir`,`Enter the factory`)} ${ic('arrow')}</button></div></div></div>`);
 }
 const ENDS=()=>({
   monopoly:[L('TEKEL',`MONOPOLY`),L('Sekiz ülke, tek imza',`Eight countries, one signature`),L('Dünyanın bütün güvenlik mürekkebi ve bandrolü artık senin hattından çıkıyor. Graviton’un tabelası söküldü.',`All the world’s security ink and tax stamps now come off your line. Graviton’s sign has been taken down.`),'hero'],
@@ -2531,9 +2375,6 @@ function toast(text,bad,tab){
 /* ---------- akış ---------- */
 function save(){if(S&&RT&&!S.over)writeLocal(SAVE_KEY,snapshot(S,RT));}
 function startGame(state){
-  if(!state.notebook || typeof state.notebook!=='object')state.notebook={};
-  if(!['lead','noted','filed'].includes(state.notebook.swiss))state.notebook.swiss='lead';
-  notebookOrigin=null;returnPinnedNote=false;
   S=state;RT=newRuntime(S);UI.tab='factory';UI.sel=null;UI.over=false;UI.speed=1;
   $('title').hidden=true;shell();refresh(true);
   if(S.intro)introModal();
@@ -2623,11 +2464,8 @@ function act(a,btn,e){
   switch(a){
     case 'tab':setTab(d.tab);break;
     case 'speed':UI.speed=Number(d.v);if(UI.speed)UI.lastSpeed=UI.speed;sfx('click');patchTop();break;
-    case 'notebook':notebookModal(btn);break;
-    case 'notebook-back':closeNotebook();break;
-    case 'notebook-swiss':visitSwissDesk();break;
-    case 'swiss-sign':signSwissRule();break;
     case 'menu':menuModal();break;
+    case 'home':save();break;
     case 'bank':sfx('click');bankModal();break;
     case 'fit':UI.fit=!UI.fit;UI.scrollX=undefined;renderFactory();break;
     case 'borrow':{const got=borrow(S,Number(d.v));if(got){sfx('coin');UI.cashPulse=RT.clock;bankModal(true);patchTop();}break;}
@@ -2658,7 +2496,10 @@ function act(a,btn,e){
     case 'choose':chooseEvent(Number(d.i));break;
     case 'lang':{
       if(!S){const c=$('cname');if(c&&c.value.trim())prefs.name=c.value.trim().replace(/\s+/g,' ').slice(0,22);}
-      applyLang(d.v);prefs.lang=LANG;writeLocal(PREF_KEY,prefs);sfx('click');
+      applyLang(d.v);prefs.lang=LANG;writeLocal(PREF_KEY,prefs);
+      const currentUrl=new URL(location.href);currentUrl.searchParams.set('lang',LANG);
+      history.replaceState(history.state,'',currentUrl);
+      sfx('click');
       if(S){$('toasts').innerHTML='';shell();UI.sigs={};UI.tickerText='';refresh(true);menuModal();}else showTitle();
       break;}
     case 'continue':{const st=readLocal(SAVE_KEY,null);if(validState(st))startGame(st);break;}
@@ -2673,7 +2514,6 @@ document.addEventListener('click',e=>{
 $('veil').addEventListener('click',e=>{if(e.target===$('veil')&&['country','help','menu','bank'].includes(UI.modal))closeModal();});
 document.addEventListener('keydown',e=>{
   if(archiveReader.open||!S||e.target.tagName==='INPUT')return;
-  if(e.key==='Escape'&&UI.modal==='notebook'){closeNotebook();return;}
   if(e.key==='Escape'&&['country','help','menu','bank'].includes(UI.modal)){closeModal();return;}
   if(UI.modal)return;
   if(e.code==='Space'){e.preventDefault();UI.speed=UI.speed?0:UI.lastSpeed;patchTop();}
@@ -2692,14 +2532,14 @@ function showTitle(){
       <button type="button" data-act="lang" data-v="tr" class="${LANG==='tr'?'on':''}" lang="tr">Türkçe</button>
       <button type="button" data-act="lang" data-v="en" class="${LANG==='en'?'on':''}" lang="en">English</button></div>
     <div class="eyebrow">${L('Fabrika ve ihale oyunu','A factory and tender game')}</div><h1>${L('Mürekkep <em>ve</em> İhale','Ink <em>&amp;</em> Tender')}</h1>
-    <p>${L('Boyahaneyi devraldığın sabah masanda İsviçre ihalesinin taslağını buluyorsun. Aracı ödemelerine ayrılan imza satırı boş. Amcanın defterindeki bir tarih, seni bu satıra kimin imza atacağına karar vermeden önce okuman gereken bir belgeye götürüyor.','On your first morning at the dye works, a draft Swiss bid is waiting on your desk. The signature line for intermediary payments is blank. A date in your uncle’s notebook points to a document he wanted you to read before deciding who signs.')}</p>
-    ${deskFolder(true)}
+    <p>${L('Eski bir boyahane, 20 milyon dolar ve sekiz ülkenin ihalesi. Mürekkebi üret, bandrolü bas, masaya otur. Rakibin Graviton hiçbir ihaleyi tesadüfen kazanmadı.','An old dye works, 20 million dollars and tenders in eight countries. Make the ink, print the stamps, take your seat at the table. Your rival Graviton never won a tender by chance.')}</p>
     <form id="start"><label for="cname">${L('Şirketinin adı','Your company’s name')}</label><input id="cname" maxlength="22" autocomplete="off" value="${esc(prefs.name)}">
-      <button class="btn" type="submit">${has?L('Yeni oyun','New game'):L('Oyuna başla','Start game')} ${ic('arrow')}</button></form>
+      <button class="btn" type="submit">${has?L('Yeni oyun','New game'):L('Fabrikayı aç','Open factory')} ${ic('arrow')}</button></form>
     <div class="sub">${has?`<button class="link gold" data-act="continue">${ic('play')} ${L(`${esc(saved.name)} ile devam et`,`Continue as ${esc(saved.name)}`)} · ${dateLabel(saved.day)}</button>`:''}
       <button class="link" data-act="help">${ic('help')} ${L('Nasıl oynanır?','How to play')}</button></div>
+    <div class="title-files"><span>${L('Amcanın masasında SICPA kupürleri duruyor.','Your uncle left his SICPA clippings on the desk.')}</span><a href="/?lang=${mapLanguage()}">${L('Haritaya dön','Back to map')}</a></div>
     <div class="facts"><div><b>${money(20)}</b>${L('başlangıç sermayesi','starting capital')}</div><div><b>8</b>${L('ülke','countries')}</div><div><b>${L('24 ay','24 months')}</b>${L('süre','to play')}</div></div>
-    <small>${L('Graviton, oyundaki kişiler, ihaleler ve olaylar kurgusaldır. SICPA Century arşivi gerçek yayınları ve belgeleri içerir.','Graviton and the game’s characters, tenders and events are fictional. The SICPA Century archive contains real publications and records.')}</small></div>`;
+    <small>${L('Oyundaki şirketler ve ihaleler kurgusaldır. Dosyalar bölümünde SICPA hakkında gerçek haberler ve belgeler yer alır.','The companies and tenders in the game are fictional. Case files contains real reporting and documents about SICPA.')}</small></div>`;
   $('start').addEventListener('submit',e=>{
     e.preventDefault();const name=$('cname').value.trim().replace(/\s+/g,' ').slice(0,22)||'Kromora';
     prefs.name=name;writeLocal(PREF_KEY,prefs);sfx('click');startGame(newState(name));
@@ -2713,7 +2553,15 @@ function boot(){
   for(let c=0;c<4;c++)root.setProperty('--face-'+c,`url(${ART['face'+c]})`);
   $('title').style.backgroundImage=`url(${ART.hero})`;
   loadArt(()=>{artReady=true;});
-  showTitle();
+  if(/^\/simulasyon(?:\/index\.html|\/)?$/.test(location.pathname)){
+    const saved=readLocal(SAVE_KEY,null);
+    const state=validState(saved)&&!saved.over?saved:newState(prefs.name);
+    state.intro=false;
+    startGame(state);
+    save();
+  }else{
+    showTitle();
+  }
   requestAnimationFrame(frame);
 }
 boot();

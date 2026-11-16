@@ -1,0 +1,7 @@
+{
+  "routes": [
+    { "src": "^/$", "dest": "/harita/index.html" },
+    { "src": "^/simulasyon/?$", "dest": "/index.html" },
+    { "handle": "filesystem" }
+  ]
+}
