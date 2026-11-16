@@ -69,6 +69,10 @@ dialog{border:0;padding:0;width:min(790px,calc(100% - 30px));max-height:90dvh;bo
 .intro-sources ul{display:flex;gap:5px 16px;flex-wrap:wrap;list-style:none;margin:7px 0 0;padding:0}
 .intro-sources a{color:inherit;text-underline-offset:3px}
 @media(max-width:680px){.hero .intro{max-width:100%}.hero .subhead{max-width:100%}.hero .engraving{opacity:.23}}
+.source-task{margin:21px 0;padding:18px clamp(14px,3vw,24px);border:1px solid #a6bee8;border-inline-start:4px solid #1654da;border-radius:6px;background:#f0f5ff;color:#142f51}
+.source-task fieldset{min-width:0;margin:0;padding:0;border:0}.source-task legend{padding:0;font-weight:650;font-size:17px;color:#112e56}.source-task .source-prompt{margin:7px 0 13px}
+.source-options{display:grid;gap:8px}.source-options label{display:flex;align-items:flex-start;gap:9px;padding:11px;background:white;border:1px solid #b4c6e1;border-radius:5px;cursor:pointer}.source-options label:has(input:checked){border-color:#1553c7;box-shadow:inset 0 0 0 1px #1553c7}.source-options input{flex:none;accent-color:#1654da;margin-block-start:5px}
+.source-task .source-feedback{margin:10px 0;color:#243e5a}.source-feedback:empty{display:none}.source-task .source-cite{display:inline-block;margin:3px 0 12px;text-underline-offset:3px}.source-pin{display:block;border:0;border-radius:5px;background:#143e7c;color:white;padding:10px 16px;font-weight:650}.source-pin:disabled{background:#d6e0ef;color:#4b5a70}
 </style></head>
 <body>
 <a class="skip" href="#haberler">Haber arşivine geç</a>
@@ -933,6 +937,54 @@ dialog{border:0;padding:0;width:min(790px,calc(100% - 30px));max-height:90dvh;bo
   let priorHash = '';
   let returnFocus = null;
   const sheetHeading = (title) => el('h3', '', title);
+  const notebookVisit = embeddedInGame && params.get('notebook') === 'swiss-tender';
+  const swissCase = 'ch-sicpa-2023';
+  function sourceTask(item) {
+    const copy = {
+      title: ['Defterine bir satır seç','Choose a line for your notebook','Eine Zeile fürs Notizbuch wählen','Choisissez une ligne pour votre carnet','اختر سطرًا لدفترك','Elige una línea para tu cuaderno'],
+      prompt: ['Aracı ödemelerini inceliyorsun. Savcılığın hangi tespiti, kendi teklifinde denetlemen gereken noktayı gösteriyor?','You are reviewing payments to intermediaries. Which finding tells you what to check in your own bid?','Du prüfst Zahlungen an Vermittler. Welcher Befund zeigt, worauf du bei deinem eigenen Angebot achten solltest?','Vous examinez les paiements aux intermédiaires. Quel constat vous indique ce qu’il faut vérifier dans votre propre offre ?','تراجع المدفوعات للوسطاء. أيّ استنتاج يبيّن لك ما ينبغي تدقيقه في عرضك؟','Estás revisando los pagos a intermediarios. ¿Qué conclusión indica qué debes comprobar en tu propia oferta?'],
+      fine: ['Şirkete 1 milyon İsviçre frangı para cezası verildi.','The company was fined one million Swiss francs.','Das Unternehmen erhielt eine Busse von einer Million Schweizer Franken.','L’entreprise a reçu une amende d’un million de francs suisses.','فُرضت على الشركة غرامة قدرها مليون فرنك سويسري.','La empresa recibió una multa de un millón de francos suizos.'],
+      controls: ['Şirket, çalışanlarının ve danışmanlarının rüşvet vermesini önleyecek tedbirleri yeterince almamıştı.','The company had taken insufficient steps to prevent bribery by employees and consultants.','Die Vorkehrungen des Unternehmens gegen Bestechung durch Mitarbeitende und Berater waren unzureichend.','Les mesures prises par l’entreprise pour prévenir la corruption par ses employés et ses consultants étaient insuffisantes.','لم تتخذ الشركة تدابير كافية لمنع موظفيها ومستشاريها من تقديم رشاوى.','Las medidas de la empresa para impedir sobornos por parte de sus empleados y consultores fueron insuficientes.'],
+      retry: ['Bu satır cezanın tutarını veriyor. Teklifini hazırlarken hangi eksikliği giderebilirsin?','That line gives the amount of the fine. Which shortcoming could you address when preparing your bid?','Diese Zeile nennt die Höhe der Busse. Welchen Mangel könntest du bei deinem Angebot beheben?','Cette ligne donne le montant de l’amende. À quelle lacune pourriez-vous remédier en préparant votre offre ?','هذا السطر يحدّد مبلغ الغرامة. ما الخلل الذي يمكنك معالجته عند إعداد عرضك؟','Esa línea indica el importe de la multa. ¿Qué deficiencia podrías corregir al preparar tu oferta?'],
+      ready: ['Bu tespiti kaynağıyla birlikte ihale masasına götürebilirsin.','You can now take this finding and its source back to the tender desk.','Du kannst diesen Befund mit seiner Quelle an den Vergabetisch mitnehmen.','Vous pouvez maintenant rapporter ce constat et sa source à la table des marchés.','يمكنك الآن العودة إلى طاولة المناقصة بهذه الملاحظة ومصدرها.','Ya puedes llevar esta conclusión y su fuente a la mesa de licitaciones.'],
+      cite: ['Savcılığın 27 Nisan 2023 tarihli yazısını oku','Read the prosecutor’s letter of 27 April 2023','Schreiben der Bundesanwaltschaft vom 27. April 2023 lesen','Lire la lettre du Ministère public du 27 avril 2023','اقرأ رسالة النيابة العامة المؤرخة في ٢٧ أبريل ٢٠٢٣','Leer la carta de la Fiscalía del 27 de abril de 2023'],
+      pin: ['Notu defterime al','Save the note to my notebook','Notiz ins Heft übernehmen','Consigner la note dans mon carnet','احفظ الملاحظة في دفتري','Guardar la nota en mi cuaderno']
+    };
+    const task=el('section','source-task');
+    const field=document.createElement('fieldset');
+    field.append(el('legend','',copy.title[li]),el('p','source-prompt',copy.prompt[li]));
+    const options=el('div','source-options');
+    const feedback=el('p','source-feedback');
+    feedback.setAttribute('role','status');
+    const pin=el('button','source-pin',copy.pin[li]);
+    pin.type='button';
+    pin.disabled=true;
+    for (const choice of ['fine','controls']) {
+      const label=el('label','');
+      const input=document.createElement('input');
+      input.type='radio';
+      input.name='notebook-finding';
+      input.value=choice;
+      input.addEventListener('change',()=>{
+        const relevant=choice==='controls';
+        pin.disabled=!relevant;
+        feedback.textContent=copy[relevant?'ready':'retry'][li];
+      });
+      label.append(input,el('span','',copy[choice][li]));
+      options.append(label);
+    }
+    field.append(options);
+    const letter=item.sources.find(source=>source.url.includes('side_letter_oag'));
+    task.append(field,feedback);
+    if(letter){const cite=sourceLink(letter,copy.cite[li]);cite.className='source-cite';task.append(cite);}
+    pin.addEventListener('click',()=>{
+      if(!pin.disabled && currentCase===swissCase && dialog.open) {
+        window.parent.postMessage({type:'sicpa-century:pin-source',caseId:swissCase,sourceId:'sicpa-0bb0c73bb1c4'},location.origin);
+      }
+    });
+    task.append(pin);
+    return task;
+  }
   function fillCase(item) {
     const content = document.createDocumentFragment();
     const title = el('h2', '', item.title);
@@ -941,6 +993,7 @@ dialog{border:0;padding:0;width:min(790px,calc(100% - 30px));max-height:90dvh;bo
       title, el('span', 'case-state status s-' + item.status, item.status_label),
       el('p', 'lead', item.lead), sheetHeading(t('finding')), el('p', '', item.finding));
     if (item.response) content.append(sheetHeading(t('response')), el('p', '', item.response));
+    if (notebookVisit && item.id===swissCase) content.append(sourceTask(item));
     if (item.events.length) {
       content.append(sheetHeading(t('timeline')));
       const timeline = el('ol', 'timeline');
@@ -1043,6 +1096,7 @@ dialog{border:0;padding:0;width:min(790px,calc(100% - 30px));max-height:90dvh;bo
   }
   byId('method-link').addEventListener('click', () => { byId('yontem').open = true; });
   window.addEventListener('hashchange', followHash);
-  followHash();
+  if (notebookVisit && !location.hash && params.get('case')===swissCase) showCase(swissCase);
+  else followHash();
 })();
 </script></body></html>
