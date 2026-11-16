@@ -459,8 +459,26 @@ main{flex:1;min-height:0;padding:14px 18px 22px;max-width:1500px;width:100%;marg
 }
 @media(max-width:520px){.fstats{grid-template-columns:1fr 1fr 1fr;gap:6px}.fstats div{padding:8px}.fstats b{font-size:17px}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
+
+.archive-cutting{margin-top:19px;padding:14px 16px;border:1px solid var(--line);border-inline-start:3px solid var(--gold);border-radius:4px;background:#17201bd9}
+.archive-cutting h3{font-family:Georgia,serif;font-size:19px;line-height:1.15;color:var(--ink);margin:0 0 5px}
+.archive-cutting p,.title .archive-cutting p{margin:0 0 7px;color:var(--muted);font-size:13px;line-height:1.5;max-width:62ch}
+.archive-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--gold);text-underline-offset:3px}
+.archive-link:focus-visible,.archive-reader button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.menu .archive-link{text-decoration:none}
+.event .archive-link{color:#47331b;align-self:flex-start;min-height:36px;font-weight:650}
+.country-archive{display:block;margin-top:13px}
+.archive-reader{position:fixed;inset:0;width:min(1420px,97vw);height:min(94dvh,1020px);max-width:100vw;max-height:100dvh;margin:auto;padding:0;border:1px solid #8f7952;border-radius:12px;background:#101915;color:var(--ink);overflow:hidden}
+.archive-reader[open]{display:flex;flex-direction:column}
+.archive-reader::backdrop{background:#08100cdb}
+.archive-reader-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;color:#f3e6cf;background:#17201b}
+.archive-reader-head strong{font-family:Georgia,serif;font-size:18px}
+.archive-reader-head button{min-height:36px;flex-shrink:0}
+.archive-reader iframe{display:block;min-height:0;flex:1;width:100%;border:0;background:white}
+@media(max-width:650px){.archive-reader{width:100vw;height:100dvh;border:0;border-radius:0}.archive-reader-head{padding:7px 12px}.archive-reader-head strong{font-size:16px}.title:has(.archive-cutting){align-items:safe center}}
 </style></head>
 <body><div id="title" class="title" hidden></div><div id="app"></div><div id="sheet"></div><div id="veil"></div><div id="toasts" aria-live="polite"></div>
+<dialog class="archive-reader" id="archive-reader" aria-labelledby="archive-reader-title"><div class="archive-reader-head"><strong id="archive-reader-title"></strong><button class="btn ghost" type="button" id="archive-reader-close"></button></div></dialog>
 <noscript>Oyunu çalıştırmak için tarayıcında JavaScript'i etkinleştir.</noscript>
 <script>/**
  * @license
@@ -2139,7 +2157,8 @@ function countryModal(){
         <div class="duo"><div class="rel">${esc(S.name)} ${relBar(c.rel)}</div><div class="rel riv">Graviton ${relBar(c.rrel)}</div></div>
         <div class="note" style="margin:-4px 0 10px">${L('Şu anki tedarikçi','Current supplier')}: <b>${c.owner===0?L('sen','you'):c.owner===1?'Graviton':L('yok','none')}</b> · ${L(`Graviton burada <b>${rivalWord(S,i)}</b>.`,`Graviton is <b>${rivalWord(S,i)}</b> here.`)}</div>
         <div class="acts">${acts}</div></div>
-    <div class="pad tend-pane">${right}</div></div></div>`;
+    <div class="pad tend-pane">${right}
+      ${k.id==='pe'?'':`<div class="country-archive">${archiveLink(L('Basın arşivinde '+k.name,k.name+' in the press archive'),k.id)}</div>`}</div></div></div>`;
 }
 
 /* ---------- uyum & basın ---------- */
@@ -2163,6 +2182,7 @@ function renderPress(){
       <p>${L(`İpuçları olaylardaki seçimlerinle gelir. Dosya dolunca ne yapacağına sen karar verirsin.`,`Clues come from your choices in events. When the file is full, you decide what to do with it.`)}</p>
       <div class="clues" id="clues"></div>
       <div class="eyebrow" style="margin-top:20px">${L(`Gazete`,`Newspaper`)}</div><div class="news" id="news"></div>
+      ${deskFolder()}
     </section></div>`;
   $('main')._rows=compRows;tickPress();
 }
@@ -2243,10 +2263,59 @@ function helpHtml(){
     <div class="note" style="margin-bottom:16px">Hedef: 24 ayın sonunda Graviton’dan fazla ülkenin tedarikçisi olmak. Sekiz ülkeyi de alırsan tekel kurarsın. Nakit sıkışırsa üstteki Kasa’ya tıkla: banka kredi verir. Boşluk tuşu oyunu duraklatır.</div>
     <button class="btn" data-act="close">Anladım ${ic('arrow')}</button></div>`;
 }
+
+// The real-world reference folder sits on top of the current game view.
+// Opening it preserves the tender, selected bid, game date and any open envelope.
+const archiveReader=$('archive-reader');
+const archiveClose=$('archive-reader-close');
+let archiveOpener=null;
+function archiveLink(label,country='',classes=''){
+  const params=new URLSearchParams({lang:LANG,from:'game',embed:'game'});
+  if(country)params.set('country',country.toUpperCase());
+  return `<a class="archive-link ${classes}" href="/harita/?${esc(params.toString())}" data-archive>${ic('globe')} ${esc(label)}</a>`;
+}
+function deskFolder(onTitle=false){
+  return `<aside class="archive-cutting"><h3>${L('Amcanın kupür dosyası','Your uncle’s press clippings')}</h3>
+    <p>${onTitle?L('Zarfın yanında «SICPA · 1927–2027» yazılı bir dosya duruyor. İçinde gerçek gazete kupürleri, ihale kayıtları ve mahkeme kararları var.','Beside the envelope lies a folder marked “SICPA · 1927–2027”. Inside are real press clippings, procurement records and court decisions.'):
+    L('Amcanın notunu hatırlıyorsun: “Tekliften önce tutanağı oku.” Dosyayı açıp SICPA hakkındaki haberleri, kamu belgelerini ve tarafların yanıtlarını ülke ülke inceleyebilirsin.','You remember your uncle’s note: “Read the minutes before you bid.” Open his folder to look up public records, news reports and responses about SICPA, country by country.')}</p>
+    ${archiveLink(L('SICPA arşivini aç','Open the SICPA archive'))}</aside>`;
+}
+function openArchive(link){
+  if(archiveReader.open)return;
+  archiveOpener=link;
+  $('archive-reader-title').textContent=L('Basın masası · SICPA Century','Press desk · SICPA Century');
+  archiveClose.textContent=L('Masaya dön','Back to the desk');
+  const frame=document.createElement('iframe');
+  frame.title=L('SICPA haber ve belge arşivi','SICPA news and document archive');
+  frame.src=link.href;
+  archiveReader.append(frame);
+  if(S)save();
+  archiveReader.showModal();
+  archiveClose.focus();
+}
+archiveClose.addEventListener('click',()=>archiveReader.close());
+archiveReader.addEventListener('close',()=>{
+  archiveReader.querySelector('iframe')?.remove();
+  if(archiveOpener?.isConnected)archiveOpener.focus({preventScroll:true});
+  archiveOpener=null;
+});
+window.addEventListener('message',event=>{
+  const frame=archiveReader.querySelector('iframe');
+  if(archiveReader.open && event.origin===location.origin && frame && event.source===frame.contentWindow && event.data?.type==='sicpa-century:close-archive')archiveReader.close();
+});
+document.addEventListener('click',e=>{
+  const link=e.target.closest('a[data-archive]');
+  if(link && !e.defaultPrevented && e.button===0 && !(e.metaKey||e.ctrlKey||e.altKey||e.shiftKey)){
+    e.preventDefault();
+    openArchive(link);
+  }
+});
+
 function menuModal(){
   openModal('menu',`<div class="menu"><h2>${L(`Menü`,`Menu`)}</h2>
     <button class="btn" data-act="close">${ic('play')} ${L(`Oyuna dön`,`Back to game`)}</button>
     <button class="btn ghost" data-act="help">${ic('help')} ${L(`Nasıl oynanır?`,`How to play`)}</button>
+    ${archiveLink(L('Amcanın kupür dosyası','Your uncle’s press clippings'),'','btn ghost')}
     <button class="btn ghost" data-act="sound">${ic(prefs.sound?'sound':'mute')} ${L('Ses','Sound')}: ${prefs.sound?L('açık','on'):L('kapalı','off')}</button>
     <button class="btn ghost" data-act="lang" data-v="${LANG==='en'?'tr':'en'}">${ic('globe')} ${LANG==='en'?'Dil: Türkçe':'Language: English'}</button>
     <button class="btn ghost" data-act="restart">${ic('refresh')} ${L(`Yeni oyun`,`New game`)}</button>
@@ -2270,7 +2339,8 @@ function introModal(){
   openModal('intro',`<div class="event"><div class="pic" style="background-image:var(--art-cover)"></div><div class="txt">
     <div class="eyebrow">${L(`OCAK 2027`,`JANUARY 2027`)}</div><h2>${L(`Bir boyahane, bir kasa, bir zarf`,`A dye works, a safe, an envelope`)}</h2>
     <p>${esc(L(`Amcandan sana eski bir boyahane ve kasada 20 milyon dolar kaldı.\n\nDünyanın banknot mürekkebini ve bandrolünü tek bir dev basıyor: Graviton. Sekiz ülkenin beşi onun elinde.\n\nMasanda imzasız bir zarf duruyor:\n«Graviton hiçbir ihaleyi tesadüfen kazanmadı. Hazır olduğunda yazacağım. — K.»`,`Your uncle left you an old dye works and 20 million dollars in the safe.\n\nOne giant prints the world’s banknote ink and tax stamps: Graviton. It holds five of the eight countries.\n\nAn unsigned envelope sits on your desk:\n«Graviton never won a tender by chance. I’ll write when you’re ready. — K.»`))}</p>
-    <div class="choices"><button class="btn dark" data-act="close">${L(`Fabrikaya gir`,`Enter the factory`)} ${ic('arrow')}</button></div></div></div>`);
+    <p>${L('Zarfın altında amcanın el yazısıyla bir not buluyorsun. “Tekliften önce tutanağı oku.” Yanına SICPA hakkında topladığı gerçek belgeleri bırakmış.','Under the envelope you find a note in your uncle’s handwriting. “Read the minutes before you bid.” Beside it are the real records he collected about SICPA.')}</p>
+    <div class="choices">${archiveLink(L('Kupür dosyasını oku','Read his press clippings'))}<button class="btn dark" data-act="close">${L(`Fabrikaya gir`,`Enter the factory`)} ${ic('arrow')}</button></div></div></div>`);
 }
 const ENDS=()=>({
   monopoly:[L('TEKEL',`MONOPOLY`),L('Sekiz ülke, tek imza',`Eight countries, one signature`),L('Dünyanın bütün güvenlik mürekkebi ve bandrolü artık senin hattından çıkıyor. Graviton’un tabelası söküldü.',`All the world’s security ink and tax stamps now come off your line. Graviton’s sign has been taken down.`),'hero'],
@@ -2371,7 +2441,7 @@ function processPending(){
 let lastTs=0;
 function frame(ts){
   const dtReal=Math.min(0.05,(ts-lastTs)/1000||0);lastTs=ts;
-  if(S){
+  if(S&&!archiveReader.open){
     RT.clock=(RT.clock||0)+dtReal;
     if(!S.over&&!UI.modal&&UI.speed>0){
       let left=dtReal*SPEEDS[UI.speed];
@@ -2442,7 +2512,7 @@ document.addEventListener('click',e=>{
 });
 $('veil').addEventListener('click',e=>{if(e.target===$('veil')&&['country','help','menu','bank'].includes(UI.modal))closeModal();});
 document.addEventListener('keydown',e=>{
-  if(!S||e.target.tagName==='INPUT')return;
+  if(archiveReader.open||!S||e.target.tagName==='INPUT')return;
   if(e.key==='Escape'&&['country','help','menu','bank'].includes(UI.modal)){closeModal();return;}
   if(UI.modal)return;
   if(e.code==='Space'){e.preventDefault();UI.speed=UI.speed?0:UI.lastSpeed;patchTop();}
@@ -2466,8 +2536,9 @@ function showTitle(){
       <button class="btn" type="submit">${has?L('Yeni oyun','New game'):L('Oyuna başla','Start game')} ${ic('arrow')}</button></form>
     <div class="sub">${has?`<button class="link gold" data-act="continue">${ic('play')} ${L(`${esc(saved.name)} ile devam et`,`Continue as ${esc(saved.name)}`)} · ${dateLabel(saved.day)}</button>`:''}
       <button class="link" data-act="help">${ic('help')} ${L('Nasıl oynanır?','How to play')}</button></div>
+    ${deskFolder(true)}
     <div class="facts"><div><b>${money(20)}</b>${L('başlangıç sermayesi','starting capital')}</div><div><b>8</b>${L('ülke','countries')}</div><div><b>${L('24 ay','24 months')}</b>${L('süre','to play')}</div></div>
-    <small>${L('Ülkeler gerçek; şirketler, kişiler, ihaleler ve olaylar tamamen kurgusaldır.','The countries are real; the companies, people, tenders and events are entirely fictional.')}</small></div>`;
+    <small>${L('Graviton, oyundaki kişiler, ihaleler ve olaylar kurgusaldır. SICPA Century arşivi gerçek yayınları ve belgeleri içerir.','Graviton and the game’s characters, tenders and events are fictional. The SICPA Century archive contains real publications and records.')}</small></div>`;
   $('start').addEventListener('submit',e=>{
     e.preventDefault();const name=$('cname').value.trim().replace(/\s+/g,' ').slice(0,22)||'Kromora';
     prefs.name=name;writeLocal(PREF_KEY,prefs);sfx('click');startGame(newState(name));
