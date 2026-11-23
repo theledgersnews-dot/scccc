@@ -2278,7 +2278,7 @@ let archiveOpener=null;
 
 function mapLanguage(){
   const lang=new URLSearchParams(location.search).get('lang');
-  return ['tr','en','de','fr','ar','es'].includes(lang)?lang:LANG;
+  return ["en","de","fr","ar","es","ru","it","zh","id","tr"].includes(lang) ? lang : LANG;
 }
 function archiveLink(){
   const params=new URLSearchParams({lang:mapLanguage(),from:'game',embed:'game'});
