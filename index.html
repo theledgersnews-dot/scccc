@@ -481,7 +481,7 @@ main{flex:1;min-height:0;padding:14px 18px 22px;max-width:1500px;width:100%;marg
 @media(max-width:820px){.tabs{gap:3px;padding-inline:5px}.tabs :is(button,a){min-width:0;white-space:normal;line-height:1.12}}
 @media(max-width:650px){.archive-reader{width:100vw;height:100dvh;border:0;border-radius:0}.archive-reader-head{padding:7px 12px}.archive-reader-head strong{font-size:16px}}
 @media(min-width:1181px) and (max-width:1380px){.top{gap:9px}.tabs :is(button,a){padding:8px}.brand b{max-width:110px}.top .stats{gap:9px}}
-</style></head>
+</style><script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script><script defer src="/_vercel/insights/script.js"></script></head>
 <body><div id="title" class="title" hidden></div><div id="app"></div><div id="sheet"></div><div id="veil"></div><div id="toasts" aria-live="polite"></div>
 <dialog class="archive-reader" id="archive-reader" aria-labelledby="archive-reader-title"><div class="archive-reader-head"><strong id="archive-reader-title"></strong><button class="btn ghost" type="button" id="archive-reader-close"></button></div></dialog>
 <noscript>Oyunu çalıştırmak için tarayıcında JavaScript'i etkinleştir.</noscript>
@@ -2390,7 +2390,7 @@ function refresh(force){
   if(force){if(UI.tab==='factory')renderFactory();else if(UI.tab==='tenders')renderTenders();else renderPress();}
   else if(UI.tab==='factory')tickFactory();else if(UI.tab==='tenders')tickTenders();else tickPress();
 }
-function setTab(t){if(UI.tab===t)return;UI.tab=t;UI.sel=null;$('sheet').innerHTML='';sfx('click');refresh(true);window.scrollTo(0,0);}
+function setTab(t){if(UI.tab===t)return;window.va('event',{name:'Simulation section opened',data:{section:t}});UI.tab=t;UI.sel=null;$('sheet').innerHTML='';sfx('click');refresh(true);window.scrollTo(0,0);}
 function handleEvents(evs){
   const show=UI.tab==='factory';
   for(const e of evs){
