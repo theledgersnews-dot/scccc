@@ -4,9 +4,9 @@
   "items": [
     {
       "id": "gambia-2026-11-24",
-      "date": "2026-11-24",
-      "source": "The African Street Journal / The Point",
-      "url": "https://africanstreetjournal.com/gm/gambia-revenue-delegation-studies-digital-tax-and-fuel-55aa0d/",
+      "date": "2026-11-23",
+      "source": "The Point",
+      "url": "https://thepoint.gm/africa/gambia/headlines/gra-delegation-studies-advanced-digital-revenue-systems-in-switzerland",
       "title": {
         "tr": "Gambiya heyeti SICPA’nın İsviçre’deki vergi ve yakıt takip sistemlerini inceledi",
         "en": "Gambian delegation examines SICPA tax and fuel monitoring systems in Switzerland"
@@ -56,6 +56,20 @@
       "summary": {
         "tr": "Business Daily Africa’ya göre Uganda Devlet Başkanı, yüksek dijital bandrol maliyetleri nedeniyle SICPA’nın beş yıllık uzatma talebini reddetti; sözleşmenin Nisan 2027’de sona ermesinin ardından değerlendirme istedi. Haberde Kenya’daki sözleşmenin de Nisan 2027’ye kadar sürdüğü ve KRA’nın şirkete biriktirdiği yaklaşık 4,5 milyar Kenya şilini borç hatırlatılıyor; tutarın güncel bakiyesi ayrıca doğrulanmadı.",
         "en": "Business Daily Africa reports that Uganda’s president rejected SICPA’s five-year extension request, citing high digital stamp costs, and called for an assessment when the contract expires in April 2027. The report says Kenya’s agreement also runs until April 2027 and recalls approximately KSh 4.5 billion in debt accumulated by KRA; the current balance has not been independently verified."
+      }
+    },
+    {
+      "id": "malaysia-philippines-stamps-2026-11-24",
+      "date": "2026-11-24",
+      "source": "The Vibes",
+      "url": "https://www.thevibes.com/articles/news/129917/counterfeit-cigarette-stamps-expose-potential-rm100m-revenue-risk-customs-steps-up-monitoring",
+      "title": {
+        "tr": "Malezya: Filipinler’de ele geçirilen sahte bandroller SICPA cihazıyla doğrulandı",
+        "en": "Malaysia: stamps seized in the Philippines identified as counterfeit using SICPA device"
+      },
+      "summary": {
+        "tr": "The Vibes’ın Maliye Bakanlığı’nın parlamento yanıtına dayandırdığı haberine göre Filipinler’de ele geçirilen 10,64 milyon Malezya sigara bandrolünün sahte olduğu, SICPA-AIR cihazı kullanılarak doğrulandı. Bakanlık, sigaralarda dijital işaretlemeye 1 Ocak 2027’de geçileceğini bildirdi; haber SICPA’yı sahtecilikle suçlamıyor.",
+        "en": "The Vibes reports, citing a parliamentary reply by the finance ministry, that 10.64 million Malaysian cigarette tax stamps seized in the Philippines were identified as counterfeit using a SICPA-AIR device. The ministry said digital marking for cigarettes would begin on 1 January 2027; the report does not accuse SICPA of counterfeiting."
       }
     }
   ]
