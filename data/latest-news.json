@@ -2,8 +2,61 @@
   "last_successful_scan": "2026-11-25T12:04:18Z",
   "baseline": "2026-11-16",
   "items": [
-    {"id":"gambia-2026-11-24","date":"2026-11-24","source":"The African Street Journal / The Point","url":"https://africanstreetjournal.com/gm/gambia-revenue-delegation-studies-digital-tax-and-fuel-55aa0d/","title":{"tr":"Gambiya heyeti SICPA’nın İsviçre’deki vergi ve yakıt takip sistemlerini inceledi","en":"Gambian delegation examines SICPA tax and fuel monitoring systems in Switzerland"},"summary":{"tr":"Habere göre Gambiya Gelir İdaresi ve kamu kurumlarının temsilcileri, 16–20 Kasım’da dijital vergi ve yakıt izleme sistemlerini inceledi; yakıt platformunun Gambiya’da henüz uygulanmadığı belirtildi.","en":"A delegation of Gambian revenue and government officials examined digital tax and fuel monitoring systems on 16–20 November; the report says the fuel platform has not been deployed in The Gambia."}},
-    {"id":"sicpa-epfl-chair-2026-11-19","date":"2026-11-19","source":"SICPA","url":"https://www.sicpa.com/pt/node/6504","title":{"tr":"SICPA ve EPFL dijital-fiziksel güven alanında araştırma kürsüsü açtı","en":"SICPA and EPFL inaugurate a digital-physical trust research chair"},"summary":{"tr":"Şirket açıklamasına göre 19 Kasım’da açılan kürsüye Profesör Miranda Wei liderlik ediyor; araştırma güvenlik, mahremiyet ve izlenebilirliği kapsıyor.","en":"According to SICPA, the chair inaugurated on 19 November is held by Professor Miranda Wei and covers security, privacy and traceability."}},
-    {"id":"ledgers-caserta-2026-11-18","date":"2026-11-18","source":"The Ledgers","url":"https://www.theledgers.news/reports/sicpa-turkey-caserta-headphone-invoices","title":{"tr":"The Ledgers, SICPA Türkiye’nin tedarikçi ödemelerini araştırdı","en":"The Ledgers investigates SICPA Türkiye supplier payments"},"summary":{"tr":"The Ledgers, incelediğini belirttiği ödeme listeleri ve faturalar üzerinden SICPA Türkiye’nin tedarikçi ilişkileri ve kulaklık alımlarına ilişkin sorular yöneltti.","en":"The Ledgers raises questions about SICPA Türkiye supplier relationships and earphone purchases based on payment lists and invoices it says it reviewed."}}
+    {
+      "id": "gambia-2026-11-24",
+      "date": "2026-11-24",
+      "source": "The African Street Journal / The Point",
+      "url": "https://africanstreetjournal.com/gm/gambia-revenue-delegation-studies-digital-tax-and-fuel-55aa0d/",
+      "title": {
+        "tr": "Gambiya heyeti SICPA’nın İsviçre’deki vergi ve yakıt takip sistemlerini inceledi",
+        "en": "Gambian delegation examines SICPA tax and fuel monitoring systems in Switzerland"
+      },
+      "summary": {
+        "tr": "Habere göre Gambiya Gelir İdaresi ve kamu kurumlarının temsilcileri, 16–20 Kasım’da dijital vergi ve yakıt izleme sistemlerini inceledi; yakıt platformunun Gambiya’da henüz uygulanmadığı belirtildi.",
+        "en": "A delegation of Gambian revenue and government officials examined digital tax and fuel monitoring systems on 16–20 November; the report says the fuel platform has not been deployed in The Gambia."
+      }
+    },
+    {
+      "id": "sicpa-epfl-chair-2026-11-19",
+      "date": "2026-11-19",
+      "source": "SICPA",
+      "url": "https://www.sicpa.com/pt/node/6504",
+      "title": {
+        "tr": "SICPA ve EPFL dijital-fiziksel güven alanında araştırma kürsüsü açtı",
+        "en": "SICPA and EPFL inaugurate a digital-physical trust research chair"
+      },
+      "summary": {
+        "tr": "Şirket açıklamasına göre 19 Kasım’da açılan kürsüye Profesör Miranda Wei liderlik ediyor; araştırma güvenlik, mahremiyet ve izlenebilirliği kapsıyor.",
+        "en": "According to SICPA, the chair inaugurated on 19 November is held by Professor Miranda Wei and covers security, privacy and traceability."
+      }
+    },
+    {
+      "id": "ledgers-caserta-2026-11-18",
+      "date": "2026-11-18",
+      "source": "The Ledgers",
+      "url": "https://www.theledgers.news/reports/sicpa-turkey-caserta-headphone-invoices",
+      "title": {
+        "tr": "The Ledgers, SICPA Türkiye’nin tedarikçi ödemelerini araştırdı",
+        "en": "The Ledgers investigates SICPA Türkiye supplier payments"
+      },
+      "summary": {
+        "tr": "The Ledgers, incelediğini belirttiği ödeme listeleri ve faturalar üzerinden SICPA Türkiye’nin tedarikçi ilişkileri ve kulaklık alımlarına ilişkin sorular yöneltti.",
+        "en": "The Ledgers raises questions about SICPA Türkiye supplier relationships and earphone purchases based on payment lists and invoices it says it reviewed."
+      }
+    },
+    {
+      "id": "uganda-kenya-tax-stamps-2026-11-24",
+      "date": "2026-11-24",
+      "source": "Business Daily Africa",
+      "url": "https://www.businessdailyafrica.com/bd/corporate/companies/eyes-on-kra-stamps-deal-as-uganda-accuses-swiss-co-of-high-costs-5682794",
+      "title": {
+        "tr": "Uganda, SICPA’nın bandrol sözleşmesini uzatma talebini reddetti; Kenya anlaşması gündemde",
+        "en": "Uganda rejects SICPA tax-stamp contract extension request as Kenya deal comes under scrutiny"
+      },
+      "summary": {
+        "tr": "Business Daily Africa’ya göre Uganda Devlet Başkanı, yüksek dijital bandrol maliyetleri nedeniyle SICPA’nın beş yıllık uzatma talebini reddetti; sözleşmenin Nisan 2027’de sona ermesinin ardından değerlendirme istedi. Haberde Kenya’daki sözleşmenin de Nisan 2027’ye kadar sürdüğü ve KRA’nın şirkete biriktirdiği yaklaşık 4,5 milyar Kenya şilini borç hatırlatılıyor; tutarın güncel bakiyesi ayrıca doğrulanmadı.",
+        "en": "Business Daily Africa reports that Uganda’s president rejected SICPA’s five-year extension request, citing high digital stamp costs, and called for an assessment when the contract expires in April 2027. The report says Kenya’s agreement also runs until April 2027 and recalls approximately KSh 4.5 billion in debt accumulated by KRA; the current balance has not been independently verified."
+      }
+    }
   ]
 }
