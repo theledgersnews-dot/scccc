@@ -1,5 +1,5 @@
 {
-  "last_successful_scan": "2026-11-27T06:03:23Z",
+  "last_successful_scan": "2026-11-28T06:00:37Z",
   "baseline": "2026-11-16",
   "items": [
     {
@@ -70,6 +70,34 @@
       "summary": {
         "tr": "The Vibes’ın Maliye Bakanlığı’nın parlamento yanıtına dayandırdığı haberine göre Filipinler’de ele geçirilen 10,64 milyon Malezya sigara bandrolünün sahte olduğu, SICPA-AIR cihazı kullanılarak doğrulandı. Bakanlık, sigaralarda dijital işaretlemeye 1 Ocak 2027’de geçileceğini bildirdi; haber SICPA’yı sahtecilikle suçlamıyor.",
         "en": "The Vibes reports, citing a parliamentary reply by the finance ministry, that 10.64 million Malaysian cigarette tax stamps seized in the Philippines were identified as counterfeit using a SICPA-AIR device. The ministry said digital marking for cigarettes would begin on 1 January 2027; the report does not accuse SICPA of counterfeiting."
+      }
+    },
+    {
+      "id": "tursab-museum-transition-2026-11",
+      "date": "2026-11-22",
+      "source": "TÜRSAB · 16–22 Kasım bülteni",
+      "url": "https://www.tursab.org.tr/assets/pdf/turizm-bulteni/turizm-bulteni-268.pdf",
+      "title": {
+        "tr": "TÜRSAB: Müze acente sistemi değişiyor; SICPA bakiye iade takvimini açıklayacak",
+        "en": "TÜRSAB: Museum agency system to change; SICPA to announce refunds timetable"
+      },
+      "summary": {
+        "tr": "TÜRSAB’ın 16–22 Kasım tarihli bültenine göre müze acente işlemleri 1 Ocak 2027’de yeni sisteme geçecek. Mevcut sistemi işleten SICPA Turkey, kalan bakiyelerin iade usulü ve takvimini 1 Aralık’a kadar duyuracak; bakiyeler yeni sisteme aktarılmayacak.",
+        "en": "According to TÜRSAB’s 16–22 November bulletin, a new museum agency system starts on 1 January 2027. SICPA Turkey, operator of the existing system, is to announce refund procedures and timing by 1 December; existing balances will not transfer."
+      }
+    },
+    {
+      "id": "ledgers-uganda-update-2026-11-27",
+      "date": "2026-11-27",
+      "source": "The Ledgers",
+      "url": "https://www.theledgers.news/tr/reports/uganda-rejects-sicpa-tax-stamp-contract-extension",
+      "title": {
+        "tr": "The Ledgers Uganda’daki SICPA kararını ve bölgesel bandrol maliyetlerini inceledi",
+        "en": "The Ledgers examines Uganda’s SICPA decision and regional tax-stamp costs"
+      },
+      "summary": {
+        "tr": "The Ledgers, Business Daily’nin 24 Kasım tarihli haberine dayanarak Uganda’nın beş yıllık uzatma talebini reddini ve Tanzanya ile Kenya’daki bandrol tartışmalarını değerlendirdi. Yayın ekibi, kendi araştırmasının kararda payı olduğuna inandığını belirtti; bu etki bağımsız olarak doğrulanmadı.",
+        "en": "Drawing on Business Daily’s 24 November report, The Ledgers examines Uganda’s rejection of the five-year extension request and stamp-cost issues in Tanzania and Kenya. The newsroom says it believes its reporting contributed to the decision; that impact has not been independently verified."
       }
     }
   ]
